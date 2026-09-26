@@ -1,4 +1,8 @@
-# みらい議会
+# みらい議会＠桑名市
+
+> これは政党チームみらいが運営しているものではありません
+
+チームみらいが公開している [みらい議会](https://github.com/team-mirai/mirai-gikai) を fork し、三重県桑名市議会向けに改変したものです。改変内容と公開前の TODO は [FORK_NOTICE.md](./FORK_NOTICE.md) を参照してください。
 
 [![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/team-mirai-volunteer/mirai-gikai)
 [![codecov](https://codecov.io/gh/team-mirai/mirai-gikai/branch/develop/graph/badge.svg)](https://codecov.io/gh/team-mirai/mirai-gikai)

@@ -73,15 +73,24 @@ export const BILL_STATUS_ORDER: Record<BillStatusEnum, number> = {
 };
 
 // House display mapping
+// 市議会は一院制のため、DB上の発議院（HR/HC）は表示には使わない。
+// オープンデータAPI等の互換のためラベル定義は残す。
 export const HOUSE_LABELS: Record<HouseEnum, string> = {
   HR: "衆議院",
   HC: "参議院",
 };
 
+// 市議会（一院制）向けの審議段階ラベル。
+// in_originating_house = 委員会審査、in_receiving_house = 本会議 と読み替える。
+export const COUNCIL_STAGE_LABELS = {
+  in_originating_house: "委員会審査中",
+  in_receiving_house: "本会議審議中",
+} as const;
+
 // ステータスを日本語ラベルに変換する関数
 export function getBillStatusLabel(
   status: BillStatusEnum,
-  originatingHouse?: HouseEnum | null
+  _originatingHouse?: HouseEnum | null
 ): string {
   switch (status) {
     case "preparing":
@@ -89,18 +98,11 @@ export function getBillStatusLabel(
     case "introduced":
       return "提出済み";
     case "in_originating_house":
-      if (originatingHouse) {
-        return `${HOUSE_LABELS[originatingHouse]}審議中`;
-      }
-      return "審議中"; // フォールバック
+      return COUNCIL_STAGE_LABELS.in_originating_house;
     case "in_receiving_house":
-      if (originatingHouse) {
-        const receivingHouse = originatingHouse === "HR" ? "HC" : "HR";
-        return `${HOUSE_LABELS[receivingHouse]}審議中`;
-      }
-      return "審議中"; // フォールバック
+      return COUNCIL_STAGE_LABELS.in_receiving_house;
     case "enacted":
-      return "成立";
+      return "可決";
     case "rejected":
       return "否決";
     default:

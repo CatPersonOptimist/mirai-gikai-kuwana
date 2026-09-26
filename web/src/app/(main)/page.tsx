@@ -1,7 +1,7 @@
 import { Container } from "@/components/layouts/container";
 import { About } from "@/components/top/about";
 import { ComingSoonSection } from "@/components/top/coming-soon-section";
-import { TeamMirai } from "@/components/top/team-mirai";
+import { OperatorInfo } from "@/components/top/operator-info";
 import { getDifficultyLevel } from "@/features/bill-difficulty/server/loaders/get-difficulty-level";
 import { BillDisclaimer } from "@/features/bills/client/components/bill-detail/bill-disclaimer";
 import { BillSearchOverlay } from "@/features/bills/client/components/bill-search-overlay";
@@ -76,7 +76,7 @@ export default async function Home() {
 
   return (
     <>
-      {/* 本日の国会セクション */}
+      {/* 本日の議会セクション */}
       <CurrentDietSession
         session={currentSession}
         closedSession={latestClosedSession}
@@ -101,14 +101,14 @@ export default async function Home() {
         <div className="py-10">
           <main className="flex flex-col gap-16">
             {/*
-              AIインタビュー受付中セクション。意見を出せる法案を最初に見せる。
+              AIインタビュー受付中セクション。意見を出せる議案を最初に見せる。
               会期では絞らない（閉会中でも受付中なら案内する）ため、注目と違って
               inSession で出し分けない。
             */}
             <InterviewOpenBillSection bills={interviewOpenBills} />
 
             {/*
-              注目の法案は会期中だけ出す。閉会中に「注目」を掲げても、審議が
+              注目の議案は会期中だけ出す。閉会中に「注目」を掲げても、審議が
               動いていない期間の情報を強調することになる。
               なお getFeaturedBills はアクティブ会期が無いと全件スコープに
               落ちるので、データ側だけでは空にならない。
@@ -128,7 +128,7 @@ export default async function Home() {
         </div>
       </Container>
 
-      {/* 前回の国会セクション（Archive） */}
+      {/* 前回の会期セクション（Archive） */}
       {previousSessionData && (
         <div className="bg-mirai-surface-muted py-10">
           <Container>
@@ -145,8 +145,8 @@ export default async function Home() {
         {/* みらい議会とは セクション */}
         <About />
 
-        {/* チームみらいについて セクション */}
-        <TeamMirai />
+        {/* 運営について セクション */}
+        <OperatorInfo />
 
         {/* 免責事項 */}
         <BillDisclaimer />

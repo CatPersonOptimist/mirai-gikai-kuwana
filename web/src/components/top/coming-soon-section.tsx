@@ -1,6 +1,7 @@
-import type { Route } from "next";
 import { ExternalLink } from "lucide-react";
+import type { Route } from "next";
 import Link from "next/link";
+import { EXTERNAL_LINKS } from "@/config/external-links";
 import type { ComingSoonBill } from "@/features/bills/shared/types";
 import { Card, CardContent } from "../ui/card";
 
@@ -14,10 +15,10 @@ export function ComingSoonSection({ bills }: ComingSoonSectionProps) {
       {/* ヘッダー */}
       <div className="flex flex-col gap-2">
         <h2 className="text-[22px] font-bold text-black leading-[1.48]">
-          これから掲載される法案
+          これから掲載される議案
         </h2>
         <p className="text-xs text-mirai-text-secondary">
-          みらい議会は、順次更新されていきます
+          みらい議会＠桑名市は、順次更新されていきます
         </p>
       </div>
 
@@ -36,16 +37,16 @@ export function ComingSoonSection({ bills }: ComingSoonSectionProps) {
         </div>
       )}
 
-      {/* 国会議案情報へのリンク */}
+      {/* 桑名市議会（審議結果）へのリンク */}
       <div className="text-right text-sm text-mirai-text-secondary">
         <Link
-          href="https://www.shugiin.go.jp/internet/itdb_gian.nsf/html/gian/menu.htm"
+          href={EXTERNAL_LINKS.COUNCIL_BILLS}
           target="_blank"
           rel="noopener noreferrer"
           className="hover:opacity-80 inline-flex items-center gap-1"
         >
-          国会に提出されているすべての法案は{" "}
-          <span className="underline">国会議案情報へ</span>
+          桑名市議会に提出されたすべての議案・審議結果は{" "}
+          <span className="underline">桑名市議会の公式サイトへ</span>
           <ExternalLink className="h-3 w-3" />
         </Link>
       </div>

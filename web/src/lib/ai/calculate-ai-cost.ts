@@ -118,8 +118,8 @@ export const modelPricing: Record<string, ModelPricing> = {
     outputTokensPerMillionUsd: 15,
   },
   [AI_MODELS.claude_sonnet_5]: {
-    inputTokensPerMillionUsd: 3,
-    outputTokensPerMillionUsd: 15,
+    inputTokensPerMillionUsd: 2,
+    outputTokensPerMillionUsd: 10,
   },
   [AI_MODELS.claude_opus_4_6]: {
     inputTokensPerMillionUsd: 5,

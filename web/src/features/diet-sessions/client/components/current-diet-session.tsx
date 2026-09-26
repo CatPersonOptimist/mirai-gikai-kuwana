@@ -13,7 +13,7 @@ type CurrentDietSessionProps = {
 };
 
 /**
- * 今国会の状況カード。
+ * 今会期（定例会・臨時会）の状況カード。
  *
  * 会期中は進行バーと残り日数を出す。パーセンテージだけだと寄付の目標額のように
  * 読まれるため、召集日と閉会予定日を併記する。
@@ -48,7 +48,7 @@ export function CurrentDietSession({
                 : "bg-mirai-surface-muted text-mirai-text-secondary"
             }`}
           >
-            {inSession ? "国会会期中" : "国会閉会中"}
+            {inSession ? "市議会会期中" : "市議会閉会中"}
           </span>
           {inSession && (
             <span className="text-[15px] font-bold text-mirai-brand-teal-deep md:ml-auto">
@@ -105,7 +105,7 @@ function SessionProgressBar({
       {/* パーセンテージ単独だと目標額のように読まれるので、日付を両端に置く。 */}
       <div className="flex items-baseline justify-between gap-2 text-xs font-bold text-mirai-text-secondary">
         <span className="whitespace-nowrap">
-          {formatDateWithDots(session.start_date)} 召集
+          {formatDateWithDots(session.start_date)} 開会
         </span>
         <span className="whitespace-nowrap">
           {formatDateWithDots(session.end_date)} 閉会予定

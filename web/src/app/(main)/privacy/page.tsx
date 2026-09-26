@@ -7,11 +7,12 @@ import {
   LegalParagraph,
   LegalSectionTitle,
 } from "@/components/layouts/legal-page-layout";
+import { SITE_CONFIG } from "@/config/site";
 import { routes } from "@/lib/routes";
 
 export const metadata: Metadata = {
-  title: "プライバシーポリシー | みらい議会",
-  description: "みらい議会のプライバシーポリシー",
+  title: "プライバシーポリシー | みらい議会＠桑名市",
+  description: "みらい議会＠桑名市のプライバシーポリシー",
 };
 
 export default function PrivacyPage() {
@@ -20,11 +21,11 @@ export default function PrivacyPage() {
       className="bg-transparent pt-24 md:pt-12"
       title="プライバシーポリシー"
       enLabel="Privacy Policy"
-      description="チームみらい（以下「当組織」といいます）における個人情報の取り扱いについてご説明します。"
+      description={`${SITE_CONFIG.operatorName}（以下「当組織」といいます）における個人情報の取り扱いについてご説明します。`}
     >
       <Container className="space-y-8">
         <p className="text-sm text-mirai-text-muted">
-          最終更新日：2026年7月29日
+          最終更新日：2026年9月26日
         </p>
 
         <section className="space-y-4">
@@ -36,7 +37,7 @@ export default function PrivacyPage() {
             items={[
               "氏名、年齢、性別、住所、電話番号、職業、メールアドレス",
               "個人ごとに割り当てられたIDやパスワード、その他識別可能な記号",
-              "当組織の提供するサービスであるみらい議会におけるAIインタビュー機能（以下「みらい議会AIインタビュー機能」といいます。）を通じて取得される対話ログ、音声データ、および行動履歴",
+              "当組織の提供するサービスであるみらい議会＠桑名市におけるAIインタビュー機能（以下「みらい議会＠桑名市AIインタビュー機能」といいます。）を通じて取得される対話ログ、音声データ、および行動履歴",
               "他の情報と容易に照合することができ、それにより特定の個人を識別できることとなるもの",
             ]}
           />
@@ -59,7 +60,7 @@ export default function PrivacyPage() {
             ]}
           />
           <LegalParagraph>
-            なお、みらい議会AIインタビュー機能を通じて当組織が取得した回答内容については、当組織は、以下の通り取り扱います。
+            なお、みらい議会＠桑名市AIインタビュー機能を通じて当組織が取得した回答内容については、当組織は、以下の通り取り扱います。
           </LegalParagraph>
           <LegalList
             items={[
@@ -84,7 +85,7 @@ export default function PrivacyPage() {
                       href={routes.interviewDataTerms()}
                       className="text-primary-accent underline"
                     >
-                      みらい議会AIインタビューデータ利用規約
+                      みらい議会＠桑名市AIインタビューデータ利用規約
                     </Link>
                     」に同意する者であれば誰でもダウンロード可能なオープンデータとして第三者に提供することがあります。
                   </>
@@ -112,7 +113,7 @@ export default function PrivacyPage() {
           </LegalParagraph>
           <LegalList
             items={[
-              "「2. 個人情報の収集方法と使用範囲」に定めるみらい議会AIインタビュー機能を通じて当組織が取得した回答内容を、本人が公開に同意した範囲で公開する場合、および別途定める「みらい議会AIインタビューデータ利用規約」に同意する者であれば誰でもダウンロード可能なオープンデータとして第三者に提供する場合",
+              "「2. 個人情報の収集方法と使用範囲」に定めるみらい議会＠桑名市AIインタビュー機能を通じて当組織が取得した回答内容を、本人が公開に同意した範囲で公開する場合、および別途定める「みらい議会＠桑名市AIインタビューデータ利用規約」に同意する者であれば誰でもダウンロード可能なオープンデータとして第三者に提供する場合",
               "ユーザー本人の同意がある場合",
               "統計的なデータなど、個人を特定できない状態で提供する場合",
               "法令に基づく開示請求（裁判所・警察等）があった場合",
@@ -152,9 +153,9 @@ export default function PrivacyPage() {
         <section className="space-y-4">
           <LegalSectionTitle>8. お問い合わせ窓口</LegalSectionTitle>
           <LegalParagraph>
-            個人情報の確認・修正・削除、またはみらい議会AIインタビュー機能の回答公開の停止等のご相談は、下記までご連絡ください。
+            個人情報の確認・修正・削除、またはみらい議会＠桑名市AIインタビュー機能の回答公開の停止等のご相談は、下記までご連絡ください。
           </LegalParagraph>
-          <LegalParagraph>support@team-mir.ai</LegalParagraph>
+          <LegalParagraph>{SITE_CONFIG.contactEmail}</LegalParagraph>
         </section>
       </Container>
     </LegalPageLayout>

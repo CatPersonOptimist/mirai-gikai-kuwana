@@ -1,6 +1,6 @@
 import { LinkButton } from "@/components/top/link-button";
 import { EXTERNAL_LINKS } from "@/config/external-links";
-import { ManualRuby } from "@/lib/rubyful/manual-ruby";
+import { SITE_CONFIG } from "@/config/site";
 
 export function BillDisclaimer() {
   return (
@@ -9,9 +9,9 @@ export function BillDisclaimer() {
       <div className="space-y-3">
         <h3 className="text-sm font-bold text-black">掲載コンテンツについて</h3>
         <p className="text-xs leading-relaxed text-mirai-text-note">
-          掲載されている法案情報は、国会に提出された議案などの公開情報を基に、チームみらいがAIを活用しながら背景情報を整理したものです。掲載法案は主に、内閣提出法案（
-          <ManualRuby ruby="かくほう">閣法</ManualRuby>
-          ）を対象としております。
+          掲載されている議案情報は、{SITE_CONFIG.councilName}
+          に提出された議案などの公開情報を基に、{SITE_CONFIG.operatorName}
+          がAIを活用しながら背景情報を整理したものです。掲載議案は主に、市長提出議案（条例案・予算案など）を対象としております。
         </p>
       </div>
 
@@ -24,15 +24,15 @@ export function BillDisclaimer() {
       </div>
 
       <LinkButton
-        href={EXTERNAL_LINKS.FAQ}
+        href={EXTERNAL_LINKS.COUNCIL_SITE}
         icon={{
           src: "/icons/question-bubble.svg",
-          alt: "note",
+          alt: "",
           width: 22,
           height: 22,
         }}
       >
-        よくある質問
+        {SITE_CONFIG.councilName}公式サイト
       </LinkButton>
     </div>
   );

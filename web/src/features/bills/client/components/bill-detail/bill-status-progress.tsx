@@ -2,13 +2,13 @@ import type { BillStatusEnum, HouseEnum } from "../../../shared/types";
 import {
   calculateProgressWidth,
   getCurrentStep,
-  getOrderedSteps,
   getStatusMessage,
   getStepState,
 } from "../../../shared/utils/bill-progress";
 
 interface BillStatusProgressProps {
   status: BillStatusEnum;
+  /** 市議会は一院制のため表示には使わない（呼び出し側との互換のため残す） */
   originatingHouse: HouseEnum;
   statusNote?: string | null;
 }
@@ -26,11 +26,12 @@ interface ProgressStepProps {
 }
 
 // 基本ステップ定義
+// 市議会（一院制）: 議案提出 → 委員会審査 → 本会議 → 可決
 const BASE_STEPS = [
-  { label: "法案\n提出" },
-  { label: "衆議院\n審議" },
-  { label: "参議院\n審議" },
-  { label: "法案\n成立" },
+  { label: "議案\n提出" },
+  { label: "委員会\n審査" },
+  { label: "本会議\n審議" },
+  { label: "議決" },
 ] as const;
 
 // ステータスバッジコンポーネント
@@ -95,13 +96,13 @@ function ProgressStep({
 
 export function BillStatusProgress({
   status,
-  originatingHouse,
   statusNote,
 }: BillStatusProgressProps) {
   const isPreparing = status === "preparing";
   const currentStep = getCurrentStep(status);
 
-  const orderedSteps = getOrderedSteps(originatingHouse, BASE_STEPS);
+  // 一院制のため発議院による並び替えは行わない
+  const orderedSteps = BASE_STEPS.map((step) => ({ label: step.label }));
   const progressWidth = calculateProgressWidth(currentStep);
 
   const statusMessage = getStatusMessage(status, statusNote);

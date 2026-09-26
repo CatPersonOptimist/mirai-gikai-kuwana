@@ -1,11 +1,11 @@
 {
-  "name": "みらい議会",
-  "short_name": "みらい議会",
-  "description": "国会で今どんな法案が検討されているか、わかりやすく伝えるプラットフォーム",
+  "name": "みらい議会＠桑名市",
+  "short_name": "みらい議会桑名",
+  "description": "桑名市議会でいまどんな議案が審議されているか、わかりやすく伝えるプラットフォーム",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#F7F4F0",
-  "theme_color": "#2aa693",
+  "theme_color": "#1f6fb2",
   "orientation": "portrait-primary",
   "icons": [
     {

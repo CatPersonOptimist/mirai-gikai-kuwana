@@ -62,11 +62,11 @@ describe("estimateInterviewCostUsd", () => {
   });
 
   it("Claude Sonnet 5の推定コストを正しく算出する", () => {
-    // input: 3 * 85000 / 1M = 0.255
-    // output: 15 * 3000 / 1M = 0.045
-    // total: 0.30
+    // input: 2 * 85000 / 1M = 0.17
+    // output: 10 * 3000 / 1M = 0.03
+    // total: 0.20
     const cost = estimateInterviewCostUsd("anthropic/claude-sonnet-5");
-    expect(cost).toBeCloseTo(0.3, 4);
+    expect(cost).toBeCloseTo(0.2, 4);
   });
 
   it("不明なモデルに対してnullを返す", () => {

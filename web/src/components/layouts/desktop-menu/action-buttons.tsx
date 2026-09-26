@@ -16,19 +16,7 @@ export function DesktopMenuActionButtons() {
           height: 20,
         }}
       >
-        みらい議会とは
-      </LinkButton>
-
-      <LinkButton
-        href={EXTERNAL_LINKS.DONATION}
-        icon={{
-          src: "/icons/heart-icon.svg",
-          alt: "寄附",
-          width: 20,
-          height: 20,
-        }}
-      >
-        寄附で応援する
+        本家「みらい議会」とは
       </LinkButton>
     </div>
   );

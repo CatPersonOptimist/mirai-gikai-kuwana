@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { SITE_CONFIG } from "@/config/site";
 import { routes } from "@/lib/routes";
 
 /**
@@ -15,7 +16,7 @@ export function DesktopMenuLogo() {
       <div className="relative w-[116px] h-[98.38px]">
         <Image
           src="/img/logo.svg"
-          alt="みらい議会ロゴ"
+          alt={`${SITE_CONFIG.serviceName}ロゴ`}
           fill
           className="object-contain"
           priority
@@ -35,13 +36,23 @@ export function DesktopMenuLogo() {
           みらい議会
         </h1>
         <p
+          className="font-extrabold text-primary-accent"
+          style={{
+            fontSize: "20px",
+            lineHeight: "1.2em",
+            letterSpacing: "0.05em",
+          }}
+        >
+          ＠{SITE_CONFIG.regionName}
+        </p>
+        <p
           className="font-bold text-black"
           style={{
             fontSize: "16px",
             lineHeight: "2em",
           }}
         >
-          国会の議論をわかりやすく
+          {SITE_CONFIG.councilName}の議論をわかりやすく
         </p>
       </div>
     </Link>
