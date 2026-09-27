@@ -92,7 +92,7 @@ export default function InterviewDataTermsPage() {
           </LegalParagraph>
           <LegalList
             items={[
-              `データ出典：「${SITE_CONFIG.serviceName} AIインタビュー（${SITE_CONFIG.operatorName}）」`,
+              `データ出典：「${SITE_CONFIG.serviceName} AIインタビュー」`,
               `データ提供元URL：${env.webUrl}/`,
               `本規約のURL：${env.webUrl}/developers/interview-data-terms`,
               {

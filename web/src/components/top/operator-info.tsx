@@ -21,9 +21,20 @@ export function OperatorInfo() {
 
         <div className="flex flex-col gap-3">
           <p className="text-[15px] leading-[28px] text-black">
-            {SITE_CONFIG.serviceName}は、{SITE_CONFIG.operatorName}
-            が運営しています。チームみらいがオープンソースで公開している「みらい議会」のソースコードをもとに、
-            {SITE_CONFIG.councilName}向けに改変したサービスです。
+            {SITE_CONFIG.serviceName}
+            は、チームみらいがオープンソースで公開している「みらい議会」のソースコードをもとに、
+            {SITE_CONFIG.councilName}向けに改変・運営しているサービスです。
+          </p>
+          <p className="text-[15px] leading-[28px] text-black">
+            運営：{SITE_CONFIG.operatorName}
+            <br />
+            お問い合わせ：
+            <a
+              href={`mailto:${SITE_CONFIG.contactEmail}`}
+              className="break-all text-primary underline underline-offset-2"
+            >
+              {SITE_CONFIG.contactEmail}
+            </a>
           </p>
           <p className="text-[15px] font-bold leading-[28px] text-black">
             {SITE_CONFIG.disclaimer}。

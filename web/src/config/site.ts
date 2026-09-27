@@ -14,10 +14,10 @@ export const SITE_CONFIG = {
   /** サービスの説明文 */
   description:
     "桑名市議会でいまどんな議案が審議されているか、わかりやすく伝えるプラットフォーム",
-  /** 運営者名（TODO: 実際の運営者名・団体名に差し替える） */
-  operatorName: "みらい議会＠桑名市 運営事務局",
-  /** 問い合わせ先（TODO: 実際の連絡先に差し替える） */
-  contactEmail: "contact@example.com",
+  /** 運営者名 */
+  operatorName: "みらい議会＠桑名市",
+  /** 問い合わせ先 */
+  contactEmail: "Cat.Person.Optimist@gmail.com",
   /** コピーライト表記 */
   copyright: "© 2026 みらい議会＠桑名市",
   /** テーマカラー（globals.css の --primary と揃える） */
