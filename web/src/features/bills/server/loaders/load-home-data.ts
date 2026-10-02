@@ -1,8 +1,8 @@
 import { getBillsByFeaturedTags } from "@/features/bills/server/loaders/get-bills-by-featured-tags";
-import { getComingSoonBills } from "./get-coming-soon-bills";
 import { getFeaturedBills } from "./get-featured-bills";
 import { getInterviewOpenBills } from "./get-interview-open-bills";
 import { getPreviousSessionBills } from "./get-previous-session-bills";
+import { getRecentlyUpdatedBills } from "./get-recently-updated-bills";
 
 /**
  * トップページ用のデータを並列取得する
@@ -13,13 +13,13 @@ export async function loadHomeData() {
     featuredBills,
     billsByTag,
     interviewOpenBills,
-    comingSoonBills,
+    recentlyUpdatedBills,
     previousSessionData,
   ] = await Promise.all([
     getFeaturedBills(),
     getBillsByFeaturedTags(),
     getInterviewOpenBills(),
-    getComingSoonBills(),
+    getRecentlyUpdatedBills(),
     getPreviousSessionBills(),
   ]);
 
@@ -27,7 +27,7 @@ export async function loadHomeData() {
     billsByTag,
     featuredBills,
     interviewOpenBills,
-    comingSoonBills,
+    recentlyUpdatedBills,
     previousSessionData,
   };
 }

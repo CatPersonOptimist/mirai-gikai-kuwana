@@ -16,6 +16,8 @@ interface PickHomeSectionsInput<
   featuredBills: readonly TBill[];
   /** AIインタビュー受付中セクションに出す議案。 */
   interviewOpenBills: readonly TBill[];
+  /** 「最近更新された議案」セクションに出す議案。 */
+  recentlyUpdatedBills?: readonly TBill[];
   /** 会期中かどうか。閉会中は注目セクションを出さない。 */
   inSession: boolean;
 }
@@ -36,6 +38,7 @@ export function pickHomeSections<
   billsByTag,
   featuredBills,
   interviewOpenBills,
+  recentlyUpdatedBills = [],
   inSession,
 }: PickHomeSectionsInput<TBill, TGroup>): PickHomeSectionsResult<
   TBill,
@@ -45,12 +48,13 @@ export function pickHomeSections<
   const shownFeaturedBills = inSession ? featuredBills : [];
   const featuredBillIds = new Set(shownFeaturedBills.map((bill) => bill.id));
 
-  // 受付中と注目に出した議案はタグ別から外す。同じカードが2回並ぶのを避ける。
-  // 受付中と注目の間では外さない。受付中のインタビューは注目の議案に付くことが
-  // 多く、注目から外すとセクションごと空になってしまう。
+  // 受付中・注目・最近更新に出した議案はタグ別から外す。同じカードが2回並ぶのを避ける。
+  // 上の3セクションの間では外さない。受付中のインタビューは注目の議案に付くことが
+  // 多く、注目から外すとセクションごと空になってしまう（最近更新も同様）。
   const excludedBillIds = new Set([
     ...interviewOpenBills.map((bill) => bill.id),
     ...featuredBillIds,
+    ...recentlyUpdatedBills.map((bill) => bill.id),
   ]);
 
   const tagGroups = billsByTag
@@ -61,12 +65,13 @@ export function pickHomeSections<
     // 上のセクションに出た議案しか無かったタグは、見出しだけが残るので落とす。
     .filter((group) => group.bills.length > 0);
 
-  // 受付中と注目は重なるので、IDで一意にする。
+  // 受付中・注目・最近更新は重なるので、IDで一意にする。
   const shownBills = [
     ...new Map(
       [
         ...interviewOpenBills,
         ...shownFeaturedBills,
+        ...recentlyUpdatedBills,
         ...tagGroups.flatMap((group) => group.bills),
       ].map((bill) => [bill.id, bill])
     ).values(),

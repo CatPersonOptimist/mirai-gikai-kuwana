@@ -1,6 +1,5 @@
 import { Container } from "@/components/layouts/container";
 import { About } from "@/components/top/about";
-import { ComingSoonSection } from "@/components/top/coming-soon-section";
 import { OperatorInfo } from "@/components/top/operator-info";
 import { getDifficultyLevel } from "@/features/bill-difficulty/server/loaders/get-difficulty-level";
 import { BillDisclaimer } from "@/features/bills/client/components/bill-detail/bill-disclaimer";
@@ -10,6 +9,7 @@ import { CategoryTabs } from "@/features/bills/server/components/category-tabs";
 import { FeaturedBillSection } from "@/features/bills/server/components/featured-bill-section";
 import { InterviewOpenBillSection } from "@/features/bills/server/components/interview-open-bill-section";
 import { PreviousSessionSection } from "@/features/bills/server/components/previous-session-section";
+import { RecentlyUpdatedBillSection } from "@/features/bills/server/components/recently-updated-bill-section";
 import { getFeaturedTags } from "@/features/bills/server/loaders/get-featured-tags";
 import { getSuggestableBills } from "@/features/bills/server/loaders/get-suggestable-bills";
 import { loadHomeData } from "@/features/bills/server/loaders/load-home-data";
@@ -34,7 +34,7 @@ export default async function Home() {
       billsByTag,
       featuredBills,
       interviewOpenBills,
-      comingSoonBills,
+      recentlyUpdatedBills,
       previousSessionData,
     },
     currentSession,
@@ -57,6 +57,7 @@ export default async function Home() {
     billsByTag,
     featuredBills,
     interviewOpenBills,
+    recentlyUpdatedBills,
     inSession,
   });
 
@@ -107,6 +108,9 @@ export default async function Home() {
             */}
             <InterviewOpenBillSection bills={interviewOpenBills} />
 
+            {/* 最近更新された議案セクション（会期では絞らない） */}
+            <RecentlyUpdatedBillSection bills={recentlyUpdatedBills} />
+
             {/*
               注目の議案は会期中だけ出す。閉会中に「注目」を掲げても、審議が
               動いていない期間の情報を強調することになる。
@@ -121,9 +125,6 @@ export default async function Home() {
 
             {/* タグ別議案一覧セクション（タグに紐づく議案を全件出す） */}
             <BillsByTagSection billsByTag={tagGroups} />
-
-            {/* Coming soonセクション */}
-            <ComingSoonSection bills={comingSoonBills} />
           </main>
         </div>
       </Container>

@@ -20,6 +20,26 @@ const base = {
 
 describe("pickHomeSections", () => {
   describe("tagGroups", () => {
+    it("最近更新に出した議案をタグ別から外す", () => {
+      const result = pickHomeSections({
+        ...base,
+        billsByTag: [group("暮らし", "a", "b")],
+        recentlyUpdatedBills: [bill("b")],
+      });
+
+      expect(shape(result.tagGroups)).toEqual([["暮らし", ["a"]]]);
+    });
+
+    it("最近更新に出した議案も shownBills に重複なく含める", () => {
+      const result = pickHomeSections({
+        ...base,
+        featuredBills: [bill("a")],
+        recentlyUpdatedBills: [bill("a"), bill("b")],
+      });
+
+      expect(ids(result.shownBills)).toEqual(["a", "b"]);
+    });
+
     it("上のセクションに出ていなければそのまま残す", () => {
       const result = pickHomeSections({
         ...base,
