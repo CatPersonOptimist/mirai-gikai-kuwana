@@ -36,7 +36,7 @@
 - **規約類**: 利用規約・プライバシーポリシー・AIインタビューデータ利用規約の運営主体・連絡先を `SITE_CONFIG` から参照するよう変更
 - **外部リンク**: 「国会議案情報へ」を桑名市議会の定例会・臨時会ページへ変更。誤り報告は運営者メールアドレス宛てに変更
 - **OGP 画像（動的生成）**: `/api/og/report` のバッジ・配色を変更
-- **AIチャットのモデル**: `openai/gpt-5.4-mini-fast` → `anthropic/claude-sonnet-5`（AI Gateway 経由）。Web 検索を OpenAI の検索ツールから Anthropic のサーバー側 Web 検索（`webSearch_20250305`、1応答最大3回、地域: 三重県桑名市）に変更。Sonnet 5 の単価表を $2 / $10（per 1M tokens）に修正
+- **AIチャットのモデル**: `openai/gpt-5.4-mini-fast` → `anthropic/claude-haiku-4.5`（AI Gateway 経由、2026-10-02 に Sonnet 5 から変更）。Web 検索を OpenAI の検索ツールから Anthropic のサーバー側 Web 検索（`webSearch_20250305`、1応答最大3回、地域: 三重県桑名市）に変更。Sonnet 5 の単価表を $2 / $10（per 1M tokens）に修正
 
 ## デプロイ
 

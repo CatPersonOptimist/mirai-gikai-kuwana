@@ -36,7 +36,7 @@ import {
 } from "./system-cost-guard";
 
 /** AIチャットで使うモデル（AI Gateway 形式） */
-const CHAT_MODEL = AI_MODELS.claude_sonnet_5;
+const CHAT_MODEL = AI_MODELS.claude_haiku_4_5;
 
 /** 1回の応答で Claude が実行できる Web 検索の最大回数 */
 const WEB_SEARCH_MAX_USES = 3;
