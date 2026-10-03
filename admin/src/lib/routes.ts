@@ -14,6 +14,7 @@ export const routes = {
   admins: () => "/admins" as const,
   tags: () => "/tags" as const,
   dietSessions: () => "/diet-sessions" as const,
+  councilMembers: () => "/council-members" as const,
   experts: () => "/experts" as const,
   interviews: () => "/interviews" as const,
   interviewOpinionBackfill: () => "/interview-opinion-backfill" as const,
@@ -23,6 +24,7 @@ export const routes = {
   billEdit: (billId: string) => `/bills/${billId}/edit` as const,
   billContentsEdit: (billId: string) =>
     `/bills/${billId}/contents/edit` as const,
+  billVotes: (billId: string) => `/bills/${billId}/votes` as const,
   billUserTopicAnalysis: (billId: string) =>
     `/bills/${billId}/user-topic-analysis` as const,
   billAnalysisViewer: (billId: string) =>

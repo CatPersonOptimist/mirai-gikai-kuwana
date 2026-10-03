@@ -1,5 +1,6 @@
 import { Container } from "@/components/layouts/container";
 import type { DifficultyLevelEnum } from "@/features/bill-difficulty/shared/types";
+import { BillMemberVotesSection } from "@/features/council-members/server/components/bill-member-votes-section";
 import { InterviewLandingSection } from "@/features/interview-config/client/components/interview-landing-section";
 import { getInterviewConfig } from "@/features/interview-config/server/loaders/get-interview-config";
 import { getPublicReportsByBillId } from "@/features/interview-report/server/loaders/get-public-reports-by-bill-id";
@@ -65,6 +66,9 @@ export async function BillDetailLayout({
       </BillDetailClient>
 
       <Container>
+        {/* 議員の賛否（登録済みの議案のみ表示。未登録なら何も出さない） */}
+        <BillMemberVotesSection billId={bill.id} />
+
         {/* 議案のトピック一覧（AIインタビュー意見の整理） */}
         <div className="my-8">
           <BillTopicsPreviewSection

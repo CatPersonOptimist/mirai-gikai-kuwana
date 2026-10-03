@@ -7,6 +7,7 @@ import {
   type LucideIcon,
   MessageCircle,
   MoreVertical,
+  Vote,
 } from "lucide-react";
 import type { Route } from "next";
 import Link from "next/link";
@@ -72,6 +73,12 @@ export function BillActionsMenu({ billId, billName }: BillActionsMenuProps) {
             icon={MessageCircle}
           >
             インタビュー設定
+          </BillActionMenuLink>
+          <BillActionMenuLink
+            href={routes.billVotes(billId) as Route}
+            icon={Vote}
+          >
+            議員の賛否
           </BillActionMenuLink>
           <BillActionMenuLink
             href={routes.billUserTopicAnalysis(billId) as Route}

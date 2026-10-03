@@ -38,6 +38,26 @@
 - **OGP 画像（動的生成）**: `/api/og/report` のバッジ・配色を変更
 - **AIチャットのモデル**: `openai/gpt-5.4-mini-fast` → `anthropic/claude-haiku-4.5`（AI Gateway 経由、2026-10-02 に Sonnet 5 から変更）。Web 検索を OpenAI の検索ツールから Anthropic のサーバー側 Web 検索（`webSearch_20250305`、1応答最大3回、地域: 三重県桑名市）に変更。Sonnet 5 の単価表を $2 / $10（per 1M tokens）に修正
 
+## 追加機能：議員別の賛否（2026-10-03）
+
+本家には無い、桑名市版独自の機能です。
+
+- 桑名市議会が公開する「議員別表決結果」をもとに、議案ごとの議員の賛否（賛成・反対・欠席・採決に加わらず）を登録・表示する
+- 公開サイト：議案ページに「議員の賛否」を表示（**賛否が1件も無い議案では何も表示しない**）。議員名から `/members/[id]`（議員ごとの賛否一覧）へ移動できる。`/members` は議員の一覧
+- 管理画面：「議員管理」（`/council-members`、1行1人でまとめて登録）と、議案ごとの「議員の賛否」（`/bills/[id]/votes`、記号「○ × 欠 －」の貼り付けでまとめて入力可）
+- DB：`council_members`・`bill_member_votes` テーブルと `member_vote_type` 型を追加（`supabase/migrations/20261003100000_create_council_members_and_votes.sql`）。既存テーブルは変更していない
+
+### 元に戻す場合
+
+1. この機能を追加したコミットを `git revert` する
+2. 次の内容の新しいマイグレーションを追加する（登録済みの議員・賛否のデータは消える）
+
+```sql
+DROP TABLE IF EXISTS bill_member_votes;
+DROP TABLE IF EXISTS council_members;
+DROP TYPE IF EXISTS member_vote_type;
+```
+
 ## デプロイ
 
 Supabase + Vercel での公開手順は [docs/20260926_2330_桑名版デプロイ手順.md](./docs/20260926_2330_桑名版デプロイ手順.md) を参照。

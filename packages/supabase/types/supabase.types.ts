@@ -93,6 +93,48 @@ export type Database = {
           },
         ]
       }
+      bill_member_votes: {
+        Row: {
+          bill_id: string
+          created_at: string
+          id: string
+          member_id: string
+          updated_at: string
+          vote: Database["public"]["Enums"]["member_vote_type"]
+        }
+        Insert: {
+          bill_id: string
+          created_at?: string
+          id?: string
+          member_id: string
+          updated_at?: string
+          vote: Database["public"]["Enums"]["member_vote_type"]
+        }
+        Update: {
+          bill_id?: string
+          created_at?: string
+          id?: string
+          member_id?: string
+          updated_at?: string
+          vote?: Database["public"]["Enums"]["member_vote_type"]
+        }
+        Relationships: [
+          {
+            foreignKeyName: "bill_member_votes_bill_id_fkey"
+            columns: ["bill_id"]
+            isOneToOne: false
+            referencedRelation: "bills"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "bill_member_votes_member_id_fkey"
+            columns: ["member_id"]
+            isOneToOne: false
+            referencedRelation: "council_members"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       bills: {
         Row: {
           created_at: string
@@ -288,6 +330,39 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      council_members: {
+        Row: {
+          created_at: string
+          display_order: number
+          faction: string | null
+          id: string
+          is_active: boolean
+          name: string
+          name_kana: string | null
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          display_order?: number
+          faction?: string | null
+          id?: string
+          is_active?: boolean
+          name: string
+          name_kana?: string | null
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          display_order?: number
+          faction?: string | null
+          id?: string
+          is_active?: boolean
+          name?: string
+          name_kana?: string | null
+          updated_at?: string
+        }
+        Relationships: []
       }
       diet_sessions: {
         Row: {
@@ -1409,6 +1484,7 @@ export type Database = {
         | "daily_life_affected"
         | "general_citizen"
       interview_role_enum: "assistant" | "user"
+      member_vote_type: "for" | "against" | "absent" | "not_voting"
       moderation_status_enum: "ok" | "warning" | "ng"
       stance_type_enum:
         | "for"
@@ -1578,6 +1654,7 @@ export const Constants = {
         "general_citizen",
       ],
       interview_role_enum: ["assistant", "user"],
+      member_vote_type: ["for", "against", "absent", "not_voting"],
       moderation_status_enum: ["ok", "warning", "ng"],
       stance_type_enum: [
         "for",

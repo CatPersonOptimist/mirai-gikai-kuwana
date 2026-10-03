@@ -111,6 +111,10 @@
     "./interview-report/sync-opinions": {
       "types": "./src/interview-report/sync-opinions.ts",
       "default": "./src/interview-report/sync-opinions.ts"
+    },
+    "./member-votes": {
+      "types": "./src/member-votes/member-votes.ts",
+      "default": "./src/member-votes/member-votes.ts"
     }
   },
   "dependencies": {
