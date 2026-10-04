@@ -2,16 +2,17 @@ import type { Route } from "next";
 import Link from "next/link";
 import { routes } from "@/lib/routes";
 import { BillCard } from "../../client/components/bill-list/bill-card";
-import type { BillWithContent } from "../../shared/types";
+import { CompactBillCard } from "../../client/components/bill-list/compact-bill-card";
+import type { HomeLatestBills } from "../loaders/get-recently-updated-bills";
 
 interface RecentlyUpdatedBillSectionProps {
-  bills: BillWithContent[];
+  latestBills: HomeLatestBills;
 }
 
 export function RecentlyUpdatedBillSection({
-  bills,
+  latestBills: { featured, sessionBills, sessionName },
 }: RecentlyUpdatedBillSectionProps) {
-  if (bills.length === 0) {
+  if (featured.length === 0) {
     return null;
   }
 
@@ -27,13 +28,31 @@ export function RecentlyUpdatedBillSection({
         </p>
       </div>
 
+      {/* 最新の議案（大きいカード） */}
       <div className="flex flex-col gap-4">
-        {bills.map((bill) => (
+        {featured.map((bill) => (
           <Link key={bill.id} href={routes.billDetail(bill.id) as Route}>
             <BillCard bill={bill} />
           </Link>
         ))}
       </div>
+
+      {/* 今の会期のその他の議案（小さいカード） */}
+      {sessionBills.length > 0 && (
+        <div className="flex flex-col gap-3">
+          <h3 className="text-base font-bold text-mirai-text">
+            {sessionName ? `${sessionName}のその他の議案` : "その他の議案"}
+            <span className="ml-2 text-sm font-medium text-mirai-text-secondary">
+              {sessionBills.length}件
+            </span>
+          </h3>
+          {sessionBills.map((bill) => (
+            <Link key={bill.id} href={routes.billDetail(bill.id) as Route}>
+              <CompactBillCard bill={bill} className="max-w-[634px]" />
+            </Link>
+          ))}
+        </div>
+      )}
     </section>
   );
 }

@@ -9,7 +9,7 @@ import {
 import { CompactBillCard } from "./compact-bill-card";
 
 /** 日付の行だけを狙う。行全体に一致させて、ステータスバッジの文言と混ざらないようにする。 */
-const DATE_LINE = /^\d{4}\.\d+\.\d+ (提出|成立)$/;
+const DATE_LINE = /^\d{4}\.\d+\.\d+ 提出$/;
 
 describe("CompactBillCard", () => {
   it("わかりやすいタイトルがあればそれを見出しにする", () => {
@@ -64,7 +64,8 @@ describe("CompactBillCard", () => {
     ).toBeInTheDocument();
   });
 
-  it("成立済みの日付には「成立」を添える", () => {
+  // 表示する日付は提出日。可決済みでも「成立」とは書かない（日付と意味が合わなくなる）。
+  it("可決済みでも日付には「提出」を添える", () => {
     render(
       <CompactBillCard
         bill={createMockBill({
@@ -74,10 +75,10 @@ describe("CompactBillCard", () => {
       />
     );
 
-    expect(screen.getByText(DATE_LINE)).toHaveTextContent("2026.2.3 成立");
+    expect(screen.getByText(DATE_LINE)).toHaveTextContent("2026.2.3 提出");
   });
 
-  it("成立していなければ「提出」を添える", () => {
+  it("審議中の議案の日付にも「提出」を添える", () => {
     render(
       <CompactBillCard
         bill={createMockBill({

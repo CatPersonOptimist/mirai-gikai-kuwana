@@ -57,7 +57,11 @@ export default async function Home() {
     billsByTag,
     featuredBills,
     interviewOpenBills,
-    recentlyUpdatedBills,
+    // 大きいカードと、今の会期の小さいカードの両方を「画面に出ている議案」として扱う
+    recentlyUpdatedBills: [
+      ...recentlyUpdatedBills.featured,
+      ...recentlyUpdatedBills.sessionBills,
+    ],
     inSession,
   });
 
@@ -108,8 +112,8 @@ export default async function Home() {
             */}
             <InterviewOpenBillSection bills={interviewOpenBills} />
 
-            {/* 最近更新された議案セクション（会期では絞らない） */}
-            <RecentlyUpdatedBillSection bills={recentlyUpdatedBills} />
+            {/* 最近更新された議案（最新3件は大きく、今の会期のその他の議案は小さく全件） */}
+            <RecentlyUpdatedBillSection latestBills={recentlyUpdatedBills} />
 
             {/*
               注目の議案は会期中だけ出す。閉会中に「注目」を掲げても、審議が
