@@ -67,7 +67,7 @@ Supabase + Vercel での公開手順は [docs/20260926_2330_桑名版デプロ�
 1. `web/src/config/site.ts`
    - `operatorName`（運営者名）・`contactEmail`（連絡先）は設定済み（2026-09-27）
 2. `web/src/config/external-links.ts`
-   - `GITHUB_REPO` は https://github.com/yasushikatayama1976/mirai-gikai-kuwana に設定済み（リポジトリを公開状態にしておくこと）
+   - `GITHUB_REPO` は https://github.com/CatPersonOptimist/mirai-gikai-kuwana に設定済み（リポジトリを公開状態にしておくこと）
 3. 規約類の法務確認（`web/src/app/(main)/terms`・`privacy`・`developers/interview-data-terms`）
    - 運営主体の実態に合わせた内容か確認（管轄裁判所は本家のまま「東京地方裁判所」）
 4. データ投入（管理画面 `admin/`）

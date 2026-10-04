@@ -10,7 +10,7 @@ export const EXTERNAL_LINKS = {
   ABOUT_NOTE: "https://note.com/team_mirai_jp/n/nd1656aa5f86d",
   FORK_GUIDELINES_NOTE: "https://note.com/team_mirai_jp/n/nc59ec347e8c7",
   /** FORK_GUIDELINES.md 必須要件6: この fork 版自身のソースコード公開先 */
-  GITHUB_REPO: "https://github.com/yasushikatayama1976/mirai-gikai-kuwana",
+  GITHUB_REPO: "https://github.com/CatPersonOptimist/mirai-gikai-kuwana",
   /** 本家「みらい議会」（推奨事項: 本家へのリンク） */
   UPSTREAM_SITE: "https://gikai.team-mir.ai/",
   /** fork 元リポジトリ */
