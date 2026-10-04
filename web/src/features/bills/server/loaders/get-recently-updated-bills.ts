@@ -16,7 +16,7 @@ export interface HomeLatestBills {
 }
 
 /**
- * トップページの「最近更新された議案」に出す議案を取得する。
+ * トップページの「最近更新された議案」に出す議案を取得する（今の会期の議案のみ）。
  * 公開済み議案一覧（getBills）と会期のキャッシュを使うので、クエリは増えない。
  */
 export async function getRecentlyUpdatedBills(): Promise<HomeLatestBills> {

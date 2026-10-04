@@ -1,4 +1,5 @@
 import { getBillsByFeaturedTags } from "@/features/bills/server/loaders/get-bills-by-featured-tags";
+import { getPastDietSessions } from "@/features/diet-sessions/server/loaders/get-past-diet-sessions";
 import { getFeaturedBills } from "./get-featured-bills";
 import { getInterviewOpenBills } from "./get-interview-open-bills";
 import { getPreviousSessionBills } from "./get-previous-session-bills";
@@ -15,12 +16,14 @@ export async function loadHomeData() {
     interviewOpenBills,
     recentlyUpdatedBills,
     previousSessionData,
+    pastDietSessions,
   ] = await Promise.all([
     getFeaturedBills(),
     getBillsByFeaturedTags(),
     getInterviewOpenBills(),
     getRecentlyUpdatedBills(),
     getPreviousSessionBills(),
+    getPastDietSessions(),
   ]);
 
   return {
@@ -29,5 +32,6 @@ export async function loadHomeData() {
     interviewOpenBills,
     recentlyUpdatedBills,
     previousSessionData,
+    pastDietSessions,
   };
 }

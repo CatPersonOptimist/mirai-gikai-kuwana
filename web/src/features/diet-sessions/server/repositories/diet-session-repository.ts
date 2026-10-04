@@ -121,3 +121,30 @@ export async function findLatestClosedDietSession(
   }
   return data;
 }
+
+/**
+ * 過去の会期の一覧を取得（開始日が新しい順）。
+ * beforeStartDate を渡すと、その日より前に始まった会期だけを返す。
+ */
+export async function findPastDietSessions(
+  beforeStartDate: string | null
+): Promise<DietSession[]> {
+  const supabase = createAdminClient();
+
+  let query = supabase
+    .from("diet_sessions")
+    .select("*")
+    .order("start_date", { ascending: false });
+  if (beforeStartDate) {
+    query = query.lt("start_date", beforeStartDate);
+  }
+
+  const { data, error } = await query;
+
+  if (error) {
+    // 一覧が出せないだけに留める。トップページ全体を500にするほどの情報ではない。
+    console.error("Failed to fetch past diet sessions:", error);
+    return [];
+  }
+  return data;
+}

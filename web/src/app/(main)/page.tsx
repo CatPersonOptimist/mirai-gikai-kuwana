@@ -19,8 +19,10 @@ import { pickHomeSections } from "@/features/bills/shared/utils/pick-home-sectio
 import { countTagChipItems } from "@/features/bills/shared/utils/tag-chip-items";
 import { HomeChatClient } from "@/features/chat/client/components/home-chat-client";
 import { CurrentDietSession } from "@/features/diet-sessions/client/components/current-diet-session";
+import { PastSessionLinks } from "@/features/diet-sessions/server/components/past-session-links";
 import { getCurrentDietSession } from "@/features/diet-sessions/server/loaders/get-current-diet-session";
 import { getLatestClosedDietSession } from "@/features/diet-sessions/server/loaders/get-latest-closed-diet-session";
+import { groupSessionsByYear } from "@/features/diet-sessions/shared/utils/group-sessions-by-year";
 import { getJapanTime } from "@/lib/utils/date";
 
 /** カテゴリタブの「注目」から飛ばす先。 */
@@ -36,6 +38,7 @@ export default async function Home() {
       interviewOpenBills,
       recentlyUpdatedBills,
       previousSessionData,
+      pastDietSessions,
     },
     currentSession,
     latestClosedSession,
@@ -69,6 +72,13 @@ export default async function Home() {
   // あちらも全会期を数えるため、押す前と後で数字が変わらない。
   // 候補用に取得済みの配列をそのまま使うので、集計のためのクエリは増えない。
   const searchTagChips = countTagChipItems(featuredTags, suggestableBills);
+
+  // 直前の会期は上でカード表示するので、リンク一覧からは外す
+  const pastSessionLinkExcludeIds = previousSessionData
+    ? [previousSessionData.session.id]
+    : [];
+  const hasPastSessionLinks =
+    groupSessionsByYear(pastDietSessions, pastSessionLinkExcludeIds).length > 0;
 
   const toBillChatContext = (bill: BillWithContent) => {
     return {
@@ -133,14 +143,21 @@ export default async function Home() {
         </div>
       </Container>
 
-      {/* 前回の会期セクション（Archive） */}
-      {previousSessionData && (
+      {/* 過去の会期（Archive）：直前の会期の議案カードと、ほかの会期へのリンク */}
+      {(previousSessionData || hasPastSessionLinks) && (
         <div className="bg-mirai-surface-muted py-10">
-          <Container>
-            <PreviousSessionSection
-              session={previousSessionData.session}
-              bills={previousSessionData.bills}
-              totalBillCount={previousSessionData.totalBillCount}
+          <Container className="flex flex-col gap-10">
+            {previousSessionData && (
+              <PreviousSessionSection
+                session={previousSessionData.session}
+                bills={previousSessionData.bills}
+                totalBillCount={previousSessionData.totalBillCount}
+              />
+            )}
+            <PastSessionLinks
+              sessions={pastDietSessions}
+              excludeSessionIds={pastSessionLinkExcludeIds}
+              heading={previousSessionData ? "ほかの会期" : "過去の会期"}
             />
           </Container>
         </div>
