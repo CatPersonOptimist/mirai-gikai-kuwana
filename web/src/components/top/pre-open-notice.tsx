@@ -14,9 +14,10 @@ export function PreOpenNotice() {
 
   return (
     <Container className="pt-4">
-      <div className="flex gap-2.5 rounded-2xl bg-mirai-badge-yellow px-4 py-3">
-        <Info className="mt-0.5 size-5 shrink-0 text-mirai-text" />
-        <p className="text-[13px] font-medium leading-relaxed text-mirai-text">
+      {/* 目立たせすぎないよう、背景はページと同じ色のまま */}
+      <div className="flex gap-2 px-1">
+        <Info className="mt-0.5 size-4 shrink-0 text-mirai-text-secondary" />
+        <p className="text-[13px] font-medium leading-relaxed text-mirai-text-secondary">
           <span className="mr-1.5 font-bold">{label}</span>
           {message}
         </p>
