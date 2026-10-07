@@ -47,6 +47,12 @@ export function HeaderClient({ difficultyLevel }: HeaderClientProps) {
                 height={21}
               />
             </Link>
+            {/* プレオープンの札（スマホは横幅が足りないので出さず、トップの説明文で伝える） */}
+            {SITE_CONFIG.preOpen.enabled && (
+              <span className="ml-2 hidden whitespace-nowrap rounded-full bg-mirai-badge-yellow px-2.5 py-0.5 text-xs font-bold text-mirai-text sm:inline-block">
+                {SITE_CONFIG.preOpen.label}
+              </span>
+            )}
           </div>
 
           {/* Navigation */}
