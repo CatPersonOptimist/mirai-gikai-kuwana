@@ -98,8 +98,9 @@ function FooterPolicies() {
 }
 
 /**
- * FORK_GUIDELINES.md 必須要件5（免責文言）・6（ソースコード公開先）と
- * 推奨事項（本家・fork 元へのリンク）
+ * FORK_GUIDELINES.md 必須要件5（免責文言）と推奨事項（本家・fork 元へのリンク）。
+ * 必須要件6（この fork 版自身のソースコードへのリンク）は、footer.config.ts の
+ * 「ソースコード」リンクで満たしている
  */
 function FooterForkNotice() {
   const linkClassName =
@@ -127,17 +128,6 @@ function FooterForkNotice() {
           ソースコード
         </a>
         ）をもとに、{SITE_CONFIG.operatorName}が改変・運営しています。
-      </p>
-      <p>
-        本サービスのソースコード：
-        <a
-          href={EXTERNAL_LINKS.GITHUB_REPO}
-          target="_blank"
-          rel="noreferrer"
-          className={`${linkClassName} break-all`}
-        >
-          {EXTERNAL_LINKS.GITHUB_REPO}
-        </a>
       </p>
     </div>
   );

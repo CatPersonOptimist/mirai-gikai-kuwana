@@ -39,10 +39,7 @@ export const policyLinks: FooterPolicyLink[] = [
     label: "プライバシーポリシー",
     href: routes.privacy(),
   },
-  {
-    label: "開発者向け",
-    href: routes.developers(),
-  },
+  // FORK_GUIDELINES.md 必須要件6: この fork 版自身のソースコードへのリンク（削除しないこと）
   {
     label: "ソースコード",
     href: EXTERNAL_LINKS.GITHUB_REPO,
