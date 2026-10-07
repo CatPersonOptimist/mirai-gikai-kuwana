@@ -44,13 +44,9 @@ export function BillVotesForm({
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const counts = useMemo(() => {
-    const result: Record<MemberVoteType | "none", number> = {
-      for: 0,
-      against: 0,
-      absent: 0,
-      not_voting: 0,
-      none: 0,
-    };
+    const result = Object.fromEntries(
+      [...MEMBER_VOTE_TYPES, "none"].map((key) => [key, 0])
+    ) as Record<MemberVoteType | "none", number>;
     for (const vote of Object.values(votes)) {
       result[vote ?? "none"] += 1;
     }
@@ -133,7 +129,7 @@ export function BillVotesForm({
             (type) =>
               `${MEMBER_VOTE_SYMBOLS[type]}＝${MEMBER_VOTE_LABELS[type]}`
           ).join("、")}
-          ）を、下の議員の並び順どおりに貼り付けてください。空白や改行は無視されます。
+          ）を、下の議員の並び順どおりに貼り付けてください。市の資料で空欄（賛成でない）のマスは「×」と入力します。空白や改行は無視されます。
         </p>
         <Textarea
           id={symbolsId}
@@ -180,8 +176,10 @@ export function BillVotesForm({
         </div>
 
         <p className="text-sm text-gray-600">
-          賛成 {counts.for}・反対 {counts.against}・欠席 {counts.absent}
-          ・採決に加わらず {counts.not_voting}・未入力 {counts.none}
+          {MEMBER_VOTE_TYPES.map(
+            (type) => `${MEMBER_VOTE_LABELS[type]} ${counts[type]}`
+          ).join("・")}
+          ・未入力 {counts.none}
         </p>
 
         <div className="divide-y rounded-lg border">

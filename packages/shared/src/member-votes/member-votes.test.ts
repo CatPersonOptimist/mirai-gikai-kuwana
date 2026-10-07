@@ -3,34 +3,35 @@ import { parseVoteSymbols } from "./member-votes";
 
 describe("parseVoteSymbols", () => {
   it("空白区切りの記号を賛否に変換する", () => {
-    const result = parseVoteSymbols("○ × 欠 －");
+    const result = parseVoteSymbols("○ × 欠 退 除 －");
 
-    expect(result.votes).toEqual(["for", "against", "absent", "not_voting"]);
+    expect(result.votes).toEqual([
+      "for",
+      "against",
+      "absent",
+      "left",
+      "recused",
+      "chair",
+    ]);
     expect(result.invalidSymbols).toEqual([]);
   });
 
   it("区切りなしの記号の並びも1文字ずつ読む", () => {
-    const result = parseVoteSymbols("○○×欠－");
+    const result = parseVoteSymbols("○○×退－");
 
-    expect(result.votes).toEqual([
-      "for",
-      "for",
-      "against",
-      "absent",
-      "not_voting",
-    ]);
+    expect(result.votes).toEqual(["for", "for", "against", "left", "chair"]);
   });
 
   it("記号の表記ゆれ（〇・x・半角ハイフン・長音）を同じ区分として扱う", () => {
     const result = parseVoteSymbols("〇 x - ー");
 
-    expect(result.votes).toEqual(["for", "against", "not_voting", "not_voting"]);
+    expect(result.votes).toEqual(["for", "against", "chair", "chair"]);
   });
 
   it("改行・カンマ・読点は区切りとして無視する", () => {
     const result = parseVoteSymbols("○,×\n欠、－");
 
-    expect(result.votes).toEqual(["for", "against", "absent", "not_voting"]);
+    expect(result.votes).toEqual(["for", "against", "absent", "chair"]);
   });
 
   it("解釈できない文字は invalidSymbols に重複なく出現順で返す", () => {

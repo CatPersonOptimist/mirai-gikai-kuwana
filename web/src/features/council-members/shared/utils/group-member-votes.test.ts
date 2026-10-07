@@ -8,26 +8,39 @@ import {
 const vote = (
   name: string,
   order: number,
-  v: "for" | "against" | "absent" | "not_voting"
+  v: "for" | "against" | "absent" | "left" | "recused" | "chair"
 ) => ({ vote: v, member: { name, display_order: order } });
 
 describe("countByVoteType", () => {
   it("区分ごとの件数を数え、該当なしの区分は0にする", () => {
     expect(
       countByVoteType([{ vote: "for" }, { vote: "for" }, { vote: "absent" }])
-    ).toEqual({ for: 2, against: 0, absent: 1, not_voting: 0 });
+    ).toEqual({
+      for: 2,
+      against: 0,
+      absent: 1,
+      left: 0,
+      recused: 0,
+      chair: 0,
+    });
   });
 });
 
 describe("groupVotesByType", () => {
-  it("賛成・反対・欠席・採決に加わらずの順にまとめ、該当なしの区分は除く", () => {
+  it("賛成・賛成でない・欠席・退席・除斥・議長の順にまとめ、該当なしの区分は除く", () => {
     const result = groupVotesByType([
       vote("A", 1, "absent"),
       vote("B", 2, "for"),
-      vote("C", 3, "not_voting"),
+      vote("C", 3, "chair"),
+      vote("D", 4, "left"),
     ]);
 
-    expect(result.map((g) => g.type)).toEqual(["for", "absent", "not_voting"]);
+    expect(result.map((g) => g.type)).toEqual([
+      "for",
+      "absent",
+      "left",
+      "chair",
+    ]);
   });
 
   it("各区分の中は議員の表示順で並べる", () => {

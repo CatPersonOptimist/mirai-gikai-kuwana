@@ -8,7 +8,9 @@ const VOTE_BADGE_CLASS: Record<MemberVoteType, string> = {
   for: "bg-mirai-brand-mint text-mirai-brand-teal-deep",
   against: "border border-mirai-text bg-white text-mirai-text",
   absent: "bg-mirai-surface-gray text-mirai-text-secondary",
-  not_voting: "bg-mirai-surface-gray text-mirai-text-secondary",
+  left: "bg-mirai-surface-gray text-mirai-text-secondary",
+  recused: "bg-mirai-surface-gray text-mirai-text-secondary",
+  chair: "bg-mirai-surface-gray text-mirai-text-secondary",
 };
 
 export function VoteBadge({ vote }: { vote: MemberVoteType }) {

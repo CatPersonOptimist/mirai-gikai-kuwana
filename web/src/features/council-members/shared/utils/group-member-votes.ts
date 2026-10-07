@@ -18,7 +18,7 @@ export function countByVoteType(
 
 /**
  * 議案の賛否を区分ごとにまとめる。
- * 区分は賛成・反対・欠席・採決に加わらずの順、各区分の中は議員の表示順。
+ * 区分は賛成・賛成でない・欠席・退席・除斥・議長の順、各区分の中は議員の表示順。
  * 該当者のいない区分は含めない。
  */
 export function groupVotesByType<

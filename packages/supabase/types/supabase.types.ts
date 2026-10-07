@@ -1484,7 +1484,13 @@ export type Database = {
         | "daily_life_affected"
         | "general_citizen"
       interview_role_enum: "assistant" | "user"
-      member_vote_type: "for" | "against" | "absent" | "not_voting"
+      member_vote_type:
+        | "for"
+        | "against"
+        | "absent"
+        | "chair"
+        | "left"
+        | "recused"
       moderation_status_enum: "ok" | "warning" | "ng"
       stance_type_enum:
         | "for"
@@ -1654,7 +1660,7 @@ export const Constants = {
         "general_citizen",
       ],
       interview_role_enum: ["assistant", "user"],
-      member_vote_type: ["for", "against", "absent", "not_voting"],
+      member_vote_type: ["for", "against", "absent", "chair", "left", "recused"],
       moderation_status_enum: ["ok", "warning", "ng"],
       stance_type_enum: [
         "for",

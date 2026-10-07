@@ -53,13 +53,13 @@ describe("buildVoteChanges", () => {
 
 describe("assignVotesInOrder", () => {
   it("議員の並び順どおりに賛否を割り当てる", () => {
-    const result = assignVotesInOrder(["m1", "m2"], ["for", "not_voting"]);
+    const result = assignVotesInOrder(["m1", "m2"], ["for", "chair"]);
 
     expect(result).toEqual({
       ok: true,
       selections: [
         { memberId: "m1", vote: "for" },
-        { memberId: "m2", vote: "not_voting" },
+        { memberId: "m2", vote: "chair" },
       ],
     });
   });
